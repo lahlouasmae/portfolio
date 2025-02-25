@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <style>
+/* Reset et styles de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* ... Gardez les styles précédents et ajoutez ceux-ci ... */
+
+.timeline-btn {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: #666;
+    cursor: pointer;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.timeline-btn:hover {
+    background: rgba(213, 63, 140, 0.1);
+}
+
+.timeline-btn.active {
+    color: #d53f8c;
+    background: rgba(213, 63, 140, 0.1);
+}
+
+.timeline-btn i {
+    font-size: 1.5rem;
+}
+
+.timeline {
+    display: none;
+}
+
+.timeline.active {
+    display: block;
+}
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.skill-category {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+.skill-category h3 {
+    color: #d53f8c;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 0.5rem;
+}
+
+.skill-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: linear-gradient(to right, #d53f8c, #ed64a6);
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.skill-item {
+    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+    color: white;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+    transition: all 0.3s;
+}
+
+.skill-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+}
+
+@media (max-width: 768px) {
+    .skills-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+}
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #4a4a4a;
+    background-color: #fff5f7;
+}
+
+/* Header */
+header {
+    background: linear-gradient(to right, #d53f8c, #ed64a6);
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+nav {
+    background: #d53f8c;
+    padding: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.1);
+}
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    gap: 2.5rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+nav a:hover {
+    color: #d53f8c;
+    background: white;
+}
+
+/* Sections */
+section {
+    padding: 5rem 2rem;
+    background: white;
+    margin: 2rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #d53f8c;
+    font-size: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 3px;
+    background: linear-gradient(to right, #d53f8c, #ed64a6);
+    border-radius: 2px;
+}
+
+/* À propos */
+#about {
+    background: white;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff5f7;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+.profile img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid white;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.2);
+}
+
+/* Projets */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.project-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+    transition: all 0.3s;
+    border: 1px solid rgba(213, 63, 140, 0.1);
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 12px rgba(213, 63, 140, 0.2);
+}
+
+.project-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom: 3px solid #d53f8c;
+}
+
+.project-info {
+    padding: 2rem;
+}
+
+.project-info h3 {
+    color: #d53f8c;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+/* Compétences */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.skill-item {
+    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 25px;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+    transition: all 0.3s;
+}
+
+.skill-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+}
+
+/* Contact */
+#contact {
+    background: white;
+}
+
+.contact-form {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: #fff5f7;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.8rem;
+    color: #d53f8c;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid rgba(213, 63, 140, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s;
+    background: white;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #d53f8c;
+    box-shadow: 0 0 0 3px rgba(213, 63, 140, 0.1);
+}
+
+button {
+    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+    color: white;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+}
+
+button:hover {
+    background: linear-gradient(135deg, #ed64a6, #d53f8c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+}
+
+/* Footer */
+footer {
+    background: #d53f8c;
+    color: white;
+    text-align: center;
+    padding: 2.5rem;
+    margin-top: 4rem;
+}
+
+/* Liens */
+a {
+    color: #d53f8c;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+a:hover {
+    color: #ed64a6;
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .profile {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+
+    nav li {
+        margin: 0.5rem 0;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .project-card {
+        margin: 0 1rem;
+    }
+}
+.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.social-icon {
+    color: white;
+    font-size: 2rem;
+    transition: all 0.3s;
+    padding: 10px;
+}
+
+/* Couleurs spécifiques au survol pour chaque icône */
+.social-icon .fa-linkedin:hover {
+    color: #0077b5;  /* Couleur LinkedIn */
+}
+
+.social-icon .fa-github:hover {
+    color: #333;  /* Couleur GitHub */
+}
+
+.social-icon .fa-envelope:hover {
+    color: #ed64a6;  /* Rose assorti au thème */
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}.social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.social-icon {
+    color: white;
+    font-size: 2rem;
+    transition: all 0.3s;
+    padding: 10px;
+}
+
+/* Couleurs spécifiques au survol pour chaque icône */
+.social-icon .fa-linkedin:hover {
+    color: #0077b5;  /* Couleur LinkedIn */
+}
+
+.social-icon .fa-github:hover {
+    color: #333;  /* Couleur GitHub */
+}
+
+.social-icon .fa-envelope:hover {
+    color: #ed64a6;  /* Rose assorti au thème */
+}
+
+.social-icon:hover {
+    transform: translateY(-3px);
+}#qualification {
+    padding: 5rem 2rem;
+    background: white;
+    margin: 2rem 0;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 3rem;
+}
+
+.timeline-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: center;
+    gap: 4rem;
+    margin-bottom: 3rem;
+}
+
+.timeline-type {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.2rem;
+    color: #d53f8c;
+}
+
+.timeline-type i {
+    font-size: 1.5rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 2px;
+    background: #d53f8c;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.4rem;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid #d53f8c;
+}
+
+.timeline-item h4 {
+    color: #d53f8c;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.timeline-location {
+    color: #666;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-date {
+    color: #888;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.timeline-date i {
+    color: #d53f8c;
+}
+
+@media (max-width: 768px) {
+    .timeline-header {
+        gap: 2rem;
+    }
+    
+    .timeline-type {
+        font-size: 1rem;
+    }
+    
+    .timeline {
+        padding-left: 1rem;
+    }
+    
+    .timeline-item {
+        padding-left: 1.5rem;
+    }
+}
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Lahlou Asmae</h1>
+        <p>Étudiante en 4ᵉ année de cycle d'ingénieur, filière Ingénierie Informatique et Technologies Émergentes.</p>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/asmae-lahlou-48a1a9304" target="_blank" class="social-icon">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/lahlouasmae" target="_blank" class="social-icon">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:asmaelahlou123@gmail.com" class="social-icon">
+                <i class="far fa-envelope"></i>
+            </a>
+            <a href="tel:+212-66639-1005" class="social-icon">
+                <i class="fas fa-phone"></i>
+            </a>
+        </div>
+    </header>
+
+
+    <nav>
+        <ul>
+            <li><a href="#about">À propos</a></li>
+            <li><a href="#projects">Projets</a></li>
+            <li><a href="#skills">Compétences</a></li>
+            <li><a href="#Qualification">Qualification</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section id="about">
+        <h2 class="section-title">À propos de moi</h2>
+        <div class="profile">
+            <img src="asmae.jpeg" alt="Photo de profil">
+            <div>
+                <p>Élève ingénieur passionné par les technologies web, mobiles, et l’innovation numérique, avec une expertise en développement full-stack (Flutter, React, PHP, Java, Firebase), intelligence artificielle, Big Data et Cloud Computing. Expérience pratique en analyse et traitement de données à grande échelle (Python, SQL, Hadoop), apprentissage automatique (TensorFlow, Scikit-learn) et architecture cloud (AWS). Compétences en DevOps avec CI/CD, Docker, Kubernetes, SonaQube et gestion d’infrastructures cloud. Toujours en quête de nouveaux défis, je conçois des solutions performantes, scalables et optimisées pour l’expérience utilisateur.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2 class="section-title">Mes Projets</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <img src="mm.png" alt="Projet 1">
+                <div class="project-info">
+                    <h3>Mindful Moments</h3>
+                    <p>Application mobile de gestion du stress avec modèle IA.</p>
+                    <p>Technologies : ReactJS, Spring Boot, Java, API RESTful, API Spotify, Python, MySQL</p>
+                    <p><a href="https://github.com/lahlouasmae/MindfulMoments" target="_blank">Lien Github</a></p>
+                  </div>
+
+            </div>
+            <div class="project-card">
+                <img src="sur.png" alt="Projet 2">
+                <div class="project-info">
+                    <h3>Ensaj Surveillance</h3>
+                    <p>Développement d'une application web de gestion de la surveillance académique </p>
+                      <p>Technologies : ReactJS, Spring Boot, Spring Security, API RESTful, MySQL</p>
+                      <p><a href="https://github.com/lahlouasmae/surveillances" target="_blank">Lien Github</a></p>
+
+                    </div>
+            </div>
+            <div class="project-card">
+              <img src="co.png" alt="Projet 2">
+              <div class="project-info">
+                  <h3>CoYAZ</h3>
+                  <p>Application de covoiturage multiplateforme</p>
+                    <p>Technologies : Flutter, Firebase</p>
+                    <p><a href="https://github.com/zinebtaghti/covoiturage" target="_blank">Lien Github</a></p>
+
+                  </div>
+          </div>
+          <div class="project-card">
+            <img src="bi.png" alt="Projet 2">
+            <div class="project-info">
+                <h3>Morocco's Developers</h3>
+                <p>
+                  Analyse de données de 5000+ profils de développeurs marocains
+                  Tableaux de bord interactifs, présentations techniques
+                  </p>
+                  <p>\\Technologies : Suite Microsoft BI (SSMS, SSIS, SSAS, SSRS)</p>
+                  <p><a href="https://drive.google.com/file/d/1rzBm6QjRZBn6K1kTozESn1YwDSNFdIEe/view?usp=drive_link" target="_blank">Rapport SSRS</a></p>
+                  <p><a href="https://www.kaggle.com/datasets/amr009/state-of-dev-mrocco-2020" target="_blank">Dataset</a></p>
+            </div>
+            </div>
+            <div class="project-card">
+              <img src="re.png" alt="Projet 2">
+              <div class="project-info">
+                  <h3>Performance des APIs</h3>
+                  <p>
+                    Étude comparative de performances d'APIs (temps de réponse, charge, comsomation des ressources)
+                     </p>
+                    <p>Technologies : JMeter, Spring Boot, Grafana, H2</p>
+                    <p><a href="https://github.com/lahlouasmae/recherche/tree/main/MultiBackend" target="_blank">Lien Github</a></p>
+                    <p><a href="https://drive.google.com/file/d/1MH0kdrhSxQHyQGUyek09elqamFjw4daV/view?usp=sharing
+                      " target="_blank">Rapport</a></p>
+
+              </div>
+          </div>
+          <div class="project-card">
+            <img src="p.png" alt="Projet 2">
+            <div class="project-info">
+                <h3>Performance de Graphql avec Apollo</h3>
+                <p>Analyse des performances client mobile (latence, débit)
+                    
+                   </p>
+                  <p>Technologies : Java, Spring Boot, MySQL</p>
+                  <p><a href="https://github.com/lahlouasmae/recherche" target="_blank">Lien Github</a></p>
+                  <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view?usp=sharing
+                    " target="_blank">Rapport</a></p>
+
+            </div>
+        </div>
+      
+            <div class="project-card">
+                <img src="flo.png" alt="Projet 3">
+                <div class="project-info">
+                    <h3>FlowerShop</h3>
+                    <p>Application e-commerce mobile pour une boutique de fleurs</p>
+                      <p>Technologies : Kotlin, PHP, MySQL</p>
+                      <p><a href="https://github.com/lahlouasmae/recherche" target="_blank">Lien Github</a></p>
+                    </div>
+            </div>
+            <div class="project-card">
+                <img src="cod.png" alt="Projet 3">
+                <div class="project-info">
+                    <h3>Code212</h3>
+                    <p>
+                        Analyse et configuration réseau pour centre de certification
+                       </p>
+                      <p>Technologies : Packet Tracer, TCP/IP, LAN</p>
+                      <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view?usp=sharing" target="_blank">Rapport</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <h2 class="section-title">Mes Compétences</h2>
+        <div class="skills-grid">
+            <!-- Développement Front-end -->
+            <div class="skill-category">
+                <h3>Front-end</h3>
+                <div class="skills-container">
+                    <span class="skill-item">HTML</span>
+                    <span class="skill-item">CSS</span>
+                    <span class="skill-item">JavaScript</span>
+                    <span class="skill-item">React</span>
+                    <span class="skill-item">Bootstrap</span>
+                    <span class="skill-item">Taiwilnd</span>
+                </div>
+            </div>
+    
+            <!-- Développement Back-end -->
+            <div class="skill-category">
+                <h3>Back-end</h3>
+                <div class="skills-container">
+                    <span class="skill-item">C#</span>
+                    <span class="skill-item">Spring boot</span>
+                    <span class="skill-item">Spring cloud</span>
+                    <span class="skill-item">Spring security</span>
+                   
+
+
+                </div>
+            </div>
+    
+            <!-- Mobile -->
+            <div class="skill-category">
+                <h3>Mobile</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Kotlin</span>
+                    <span class="skill-item">Flutter</span>
+                    <span class="skill-item">Java</span>
+                    <span class="skill-item">React Native</span>
+                </div>
+            </div>
+    
+            <!-- Base de données -->
+            <div class="skill-category">
+                <h3>Base de données</h3>
+                <div class="skills-container">
+                    <span class="skill-item">MySQL</span>
+                    <span class="skill-item">Firebase</span>
+                    <span class="skill-item">Oracle</span>
+                    <span class="skill-item">Sql Server</span>
+
+                </div>
+            </div>
+    
+            <!-- DevOps & Outils -->
+            <div class="skill-category">
+                <h3>DevOps & Outils</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">SonarQube</span>
+                    <span class="skill-item">Git</span>
+                    <span class="skill-item">Kubernetes</span>
+                </div>
+            </div>
+    
+            <!-- Tests -->
+            <div class="skill-category">
+                <h3>Tests</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Junit</span>
+                    <span class="skill-item">Expresso</span>
+                    <span class="skill-item">Mockito</span>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Data Analyste</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Power Bi</span>
+                    <span class="skill-item">Talend</span>
+                    <span class="skill-item">Tibco Jasper</span>
+                    <span class="skill-item">SSAS, SSIS, SSRS</span>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="Qualification">
+        <h2 class="section-title">Qualification</h2>
+        <h3 class="section-subtitle">Mon parcours personnel</h3>
+    
+        <div class="timeline-container">
+            <div class="timeline-header">
+                <button class="timeline-btn active" data-target="education">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Education</span>
+                </button>
+                <button class="timeline-btn" data-target="experience">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Experience</span>
+                </button>
+            </div>
+    
+            <div class="timeline" id="education">
+                <div class="timeline-item">
+                    <h4>Cycle d'ingénieur</h4>
+                    <p class="timeline-location">ENSAJ</p>
+                    <p class="timeline-date">
+                        <i class="far fa-calendar-alt"></i>
+                        2023 - 2025
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Deux années préparatoires</h4>
+                    <p class="timeline-location">ENSAJ</p>
+                    <p class="timeline-date">
+                        <i class="far fa-calendar-alt"></i>
+                        2021 - 2023
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Bacalaureat</h4>
+                    <p class="timeline-location">Lycée Qualifiant Jaafer El Fassi El Fihri</p>
+                    <p class="timeline-date">
+                        <i class="far fa-calendar-alt"></i>
+                        2018-2021
+                    </p>
+                </div>
+            </div>
+    
+            <div class="timeline" id="experience" style="display: none;">
+                <div class="timeline-item">
+                    <h4>Stagiaire en Développement web</h4>
+                    <p class="timeline-location">CihBank</p>
+                    <p class="timeline-date">
+                        <i class="far fa-calendar-alt"></i>
+                        juil. 2024 - aout. 2024
+                    </p>
+                </div>
+                <div class="timeline-item">
+                    <h4>Stagiaire en Système d'information</h4>
+                    <p class="timeline-location">Exxelia</p>
+                    <p class="timeline-date">
+                        <i class="far fa-calendar-alt"></i>
+                        juil. 2023 - aout. 2023
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact">
+        <h2 class="section-title">Me Contacter</h2>
+        <form class="contact-form" id="contactForm">
+            <div class="form-group">
+                <label for="name">Nom</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Lahlou Asmae. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling pour les liens de navigation
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                document.querySelector(targetId).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Gestion du formulaire de contact
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Récupération des valeurs
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            // Simulation d'envoi (à remplacer par votre logique d'envoi réelle)
+            console.log('Formulaire soumis :', { name, email, message });
+            alert('Merci pour votre message ! Je vous répondrai bientôt.');
+            
+            // Reset du formulaire
+            this.reset();
+        });
+
+        // Animation des cartes projet au scroll
+        const observerOptions = {
+            threshold: 0.2
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.5s ease-out';
+            observer.observe(card);
+        });
+        // Ajoutez ce code dans votre balise script existante
+document.addEventListener('DOMContentLoaded', function() {
+    const buttons = document.querySelectorAll('.timeline-btn');
+    const timelines = document.querySelectorAll('.timeline');
+
+    // Afficher Education par défaut
+    document.querySelector('#education').style.display = 'block';
+
+    buttons.forEach(button => {
+        button.addEventListener('click', () => {
+            // Retirer la classe active de tous les boutons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Ajouter la classe active au bouton cliqué
+            button.classList.add('active');
+            
+            // Cacher toutes les timelines
+            timelines.forEach(timeline => {
+                timeline.style.display = 'none';
+            });
+            
+            // Afficher la timeline correspondante
+            const targetId = button.getAttribute('data-target');
+            document.getElementById(targetId).style.display = 'block';
+        });
+    });
+});
+    </script>
+</body>
+</html>
