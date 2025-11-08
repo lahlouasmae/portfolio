@@ -4,173 +4,158 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Portfolio</title>
+    <title>Lahlou Asmae | Portfolio</title>
     <style>
-/* Reset et styles de base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-/* ... Gardez les styles précédents et ajoutez ceux-ci ... */
 
-.timeline-btn {
-    background: none;
-    border: none;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
-    color: #666;
-    cursor: pointer;
-    padding: 1rem 2rem;
-    border-radius: 8px;
-    transition: all 0.3s;
+:root {
+    --primary: #d53f8c;
+    --primary-light: #ed64a6;
+    --bg-light: #fff5f7;
+    --text-dark: #4a4a4a;
+    --shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
 }
 
-.timeline-btn:hover {
-    background: rgba(213, 63, 140, 0.1);
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background-color: var(--bg-light);
 }
 
-.timeline-btn.active {
-    color: #d53f8c;
-    background: rgba(213, 63, 140, 0.1);
-}
-
-.timeline-btn i {
-    font-size: 1.5rem;
-}
-
-.timeline {
-    display: none;
-}
-
-.timeline.active {
-    display: block;
-}
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.skill-category {
-    background: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
-}
-
-.skill-category h3 {
-    color: #d53f8c;
-    margin-bottom: 1.5rem;
-    font-size: 1.3rem;
+/* Header amélioré */
+header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    padding: 4rem 2rem;
     text-align: center;
     position: relative;
-    padding-bottom: 0.5rem;
+    overflow: hidden;
 }
 
-.skill-category h3::after {
+header::before {
     content: '';
     position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
     bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50px;
-    height: 2px;
-    background: linear-gradient(to right, #d53f8c, #ed64a6);
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="rgba(255,255,255,0.1)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') bottom center no-repeat;
+    opacity: 0.3;
 }
 
-.skills-container {
+header h1 {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInDown 0.8s ease;
+}
+
+header p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease 0.2s both;
+}
+
+.social-icons {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
     justify-content: center;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    position: relative;
+    z-index: 1;
+    animation: fadeInUp 0.8s ease 0.4s both;
 }
 
-.skill-item {
-    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+.social-icon {
     color: white;
-    padding: 0.6rem 1.2rem;
-    border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+    font-size: 1.8rem;
     transition: all 0.3s;
+    padding: 0.8rem;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
 }
 
-.skill-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+.social-icon:hover {
+    transform: translateY(-5px) scale(1.1);
+    background: white;
 }
 
-@media (max-width: 768px) {
-    .skills-grid {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-    }
-}
-body {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    color: #4a4a4a;
-    background-color: #fff5f7;
-}
+.social-icon:hover .fa-linkedin { color: #0077b5; }
+.social-icon:hover .fa-github { color: #333; }
+.social-icon:hover .fa-envelope { color: var(--primary); }
+.social-icon:hover .fa-phone { color: #25D366; }
 
-/* Header */
-header {
-    background: linear-gradient(to right, #d53f8c, #ed64a6);
-    color: white;
-    padding: 3rem 0;
-    text-align: center;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
-}
-
+/* Navigation moderne */
 nav {
-    background: #d53f8c;
+    background: white;
     padding: 1rem;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.1);
+    box-shadow: var(--shadow);
 }
 
 nav ul {
     display: flex;
     justify-content: center;
     list-style: none;
-    gap: 2.5rem;
+    gap: 2rem;
+    flex-wrap: wrap;
 }
 
 nav a {
-    color: white;
+    color: var(--primary);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     transition: all 0.3s;
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    padding: 0.5rem 1.2rem;
+    border-radius: 25px;
+    position: relative;
+}
+
+nav a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background: var(--primary);
+    transition: width 0.3s;
+}
+
+nav a:hover::after {
+    width: 80%;
 }
 
 nav a:hover {
-    color: #d53f8c;
-    background: white;
+    background: var(--bg-light);
 }
 
 /* Sections */
 section {
     padding: 5rem 2rem;
     background: white;
-    margin: 2rem 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+    margin: 2rem auto;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    max-width: 1400px;
 }
 
 .section-title {
     text-align: center;
     margin-bottom: 3rem;
-    color: #d53f8c;
+    color: var(--primary);
     font-size: 2.5rem;
     position: relative;
     padding-bottom: 1rem;
@@ -183,65 +168,77 @@ section {
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
-    height: 3px;
-    background: linear-gradient(to right, #d53f8c, #ed64a6);
+    height: 4px;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
     border-radius: 2px;
 }
 
-/* À propos */
-#about {
-    background: white;
-}
-
+/* Profil amélioré */
 .profile {
     display: flex;
     align-items: center;
     gap: 3rem;
-    max-width: 900px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 2rem;
-    background: #fff5f7;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+    padding: 2.5rem;
+    background: linear-gradient(135deg, var(--bg-light), white);
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(213, 63, 140, 0.15);
 }
 
 .profile img {
-    width: 250px;
-    height: 250px;
+    width: 280px;
+    height: 280px;
     border-radius: 50%;
     object-fit: cover;
-    border: 5px solid white;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.2);
+    border: 6px solid white;
+    box-shadow: 0 8px 20px rgba(213, 63, 140, 0.3);
+    transition: transform 0.3s;
 }
 
-/* Projets */
+.profile img:hover {
+    transform: scale(1.05) rotate(3deg);
+}
+
+.profile-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+}
+
+/* Projets Grid moderne */
 .projects-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2.5rem;
-    max-width: 1300px;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
 .project-card {
     background: white;
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
-    transition: all 0.3s;
-    border: 1px solid rgba(213, 63, 140, 0.1);
+    box-shadow: 0 5px 15px rgba(213, 63, 140, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid transparent;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(213, 63, 140, 0.2);
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(213, 63, 140, 0.25);
+    border-color: var(--primary-light);
 }
 
 .project-card img {
     width: 100%;
-    height: 220px;
+    height: 230px;
     object-fit: cover;
-    border-bottom: 3px solid #d53f8c;
+    transition: transform 0.4s;
+}
+
+.project-card:hover img {
+    transform: scale(1.1);
 }
 
 .project-info {
@@ -249,48 +246,246 @@ section {
 }
 
 .project-info h3 {
-    color: #d53f8c;
+    color: var(--primary);
     margin-bottom: 1rem;
     font-size: 1.5rem;
 }
 
-/* Compétences */
-.skills-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1.5rem;
-    justify-content: center;
-    max-width: 1100px;
+.project-info p {
+    margin-bottom: 0.8rem;
+    line-height: 1.6;
+}
+
+.project-info a {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.project-info a:hover {
+    color: var(--primary-light);
+    transform: translateX(5px);
+}
+
+/* Skills Grid amélioré */
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1400px;
     margin: 0 auto;
 }
 
+.skill-category {
+    background: linear-gradient(135deg, white, var(--bg-light));
+    padding: 2.5rem;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(213, 63, 140, 0.1);
+    transition: transform 0.3s;
+}
+
+.skill-category:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(213, 63, 140, 0.2);
+}
+
+.skill-category h3 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.skill-category h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(to right, var(--primary), var(--primary-light));
+    border-radius: 2px;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+}
+
 .skill-item {
-    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
     color: white;
-    padding: 1rem 2rem;
+    padding: 0.7rem 1.4rem;
     border-radius: 25px;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+    font-size: 0.95rem;
+    font-weight: 600;
+    box-shadow: 0 3px 8px rgba(213, 63, 140, 0.3);
     transition: all 0.3s;
 }
 
 .skill-item:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 5px 12px rgba(213, 63, 140, 0.4);
 }
 
-/* Contact */
-#contact {
+/* Timeline améliorée */
+.timeline-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.timeline-btn {
     background: white;
+    border: 2px solid var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-size: 1.2rem;
+    color: var(--primary);
+    cursor: pointer;
+    padding: 1rem 2.5rem;
+    border-radius: 30px;
+    transition: all 0.3s;
+    font-weight: 600;
 }
 
+.timeline-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(213, 63, 140, 0.3);
+}
+
+.timeline-btn.active {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 5px 15px rgba(213, 63, 140, 0.3);
+}
+
+.timeline {
+    display: none;
+    position: relative;
+    padding-left: 3rem;
+}
+
+.timeline.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 3px;
+    background: linear-gradient(to bottom, var(--primary), var(--primary-light));
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 3rem;
+    padding-left: 2.5rem;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -2.65rem;
+    top: 0;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0 0 4px rgba(213, 63, 140, 0.1);
+}
+
+.timeline-item h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.timeline-location {
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-date {
+    color: #888;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Certifications Section */
+.certifications-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+}
+
+.cert-card {
+    background: linear-gradient(135deg, white, var(--bg-light));
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(213, 63, 140, 0.1);
+    transition: all 0.3s;
+    border-left: 4px solid var(--primary);
+}
+
+.cert-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(213, 63, 140, 0.2);
+}
+
+.cert-card h4 {
+    color: var(--primary);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+.cert-card p {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.cert-date {
+    color: #888;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+    display: block;
+}
+
+/* Contact Form amélioré */
 .contact-form {
     max-width: 700px;
     margin: 0 auto;
-    padding: 2rem;
-    background: #fff5f7;
-    border-radius: 15px;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
+    padding: 3rem;
+    background: linear-gradient(135deg, var(--bg-light), white);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(213, 63, 140, 0.15);
 }
 
 .form-group {
@@ -300,261 +495,124 @@ section {
 .form-group label {
     display: block;
     margin-bottom: 0.8rem;
-    color: #d53f8c;
-    font-weight: bold;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.05rem;
 }
 
 .form-group input,
 .form-group textarea {
     width: 100%;
-    padding: 1rem;
+    padding: 1.2rem;
     border: 2px solid rgba(213, 63, 140, 0.2);
-    border-radius: 8px;
+    border-radius: 12px;
     transition: all 0.3s;
     background: white;
+    font-size: 1rem;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #d53f8c;
-    box-shadow: 0 0 0 3px rgba(213, 63, 140, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(213, 63, 140, 0.1);
+    transform: translateY(-2px);
 }
 
 button {
-    background: linear-gradient(135deg, #d53f8c, #ed64a6);
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
     color: white;
-    padding: 1rem 2.5rem;
+    padding: 1.2rem 3rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 30px;
     cursor: pointer;
     transition: all 0.3s;
-    font-weight: bold;
+    font-weight: 700;
     font-size: 1.1rem;
-    box-shadow: 0 2px 4px rgba(213, 63, 140, 0.2);
+    box-shadow: 0 4px 12px rgba(213, 63, 140, 0.3);
 }
 
 button:hover {
-    background: linear-gradient(135deg, #ed64a6, #d53f8c);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.3);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(213, 63, 140, 0.4);
 }
 
 /* Footer */
 footer {
-    background: #d53f8c;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
     color: white;
     text-align: center;
     padding: 2.5rem;
     margin-top: 4rem;
 }
 
-/* Liens */
-a {
-    color: #d53f8c;
-    text-decoration: none;
-    transition: all 0.3s;
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-a:hover {
-    color: #ed64a6;
-    text-decoration: underline;
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* Responsive */
 @media (max-width: 768px) {
+    header h1 { font-size: 2rem; }
+    header p { font-size: 1rem; }
+    
     .profile {
         flex-direction: column;
         text-align: center;
-        padding: 1.5rem;
+        padding: 2rem;
     }
-
+    
+    .profile img {
+        width: 220px;
+        height: 220px;
+    }
+    
     nav ul {
         flex-direction: column;
-        text-align: center;
         gap: 1rem;
     }
-
-    nav li {
-        margin: 0.5rem 0;
+    
+    .section-title { font-size: 2rem; }
+    
+    .projects-grid,
+    .skills-grid,
+    .certifications-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
     }
-
-    .section-title {
-        font-size: 2rem;
-    }
-
-    .project-card {
-        margin: 0 1rem;
-    }
-}
-.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 1rem 0;
-}
-
-.social-icon {
-    color: white;
-    font-size: 2rem;
-    transition: all 0.3s;
-    padding: 10px;
-}
-
-/* Couleurs spécifiques au survol pour chaque icône */
-.social-icon .fa-linkedin:hover {
-    color: #0077b5;  /* Couleur LinkedIn */
-}
-
-.social-icon .fa-github:hover {
-    color: #333;  /* Couleur GitHub */
-}
-
-.social-icon .fa-envelope:hover {
-    color: #ed64a6;  /* Rose assorti au thème */
-}
-
-.social-icon:hover {
-    transform: translateY(-3px);
-}.social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    margin: 1rem 0;
-}
-
-.social-icon {
-    color: white;
-    font-size: 2rem;
-    transition: all 0.3s;
-    padding: 10px;
-}
-
-/* Couleurs spécifiques au survol pour chaque icône */
-.social-icon .fa-linkedin:hover {
-    color: #0077b5;  /* Couleur LinkedIn */
-}
-
-.social-icon .fa-github:hover {
-    color: #333;  /* Couleur GitHub */
-}
-
-.social-icon .fa-envelope:hover {
-    color: #ed64a6;  /* Rose assorti au thème */
-}
-
-.social-icon:hover {
-    transform: translateY(-3px);
-}#qualification {
-    padding: 5rem 2rem;
-    background: white;
-    margin: 2rem 0;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(213, 63, 140, 0.1);
-}
-
-.section-subtitle {
-    text-align: center;
-    color: #666;
-    margin-bottom: 3rem;
-}
-
-.timeline-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.timeline-header {
-    display: flex;
-    justify-content: center;
-    gap: 4rem;
-    margin-bottom: 3rem;
-}
-
-.timeline-type {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 1.2rem;
-    color: #d53f8c;
-}
-
-.timeline-type i {
-    font-size: 1.5rem;
-}
-
-.timeline {
-    position: relative;
-    padding-left: 2rem;
-}
-
-.timeline::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 2px;
-    background: #d53f8c;
-}
-
-.timeline-item {
-    position: relative;
-    padding-bottom: 3rem;
-    padding-left: 2rem;
-}
-
-.timeline-item::before {
-    content: '';
-    position: absolute;
-    left: -2.4rem;
-    top: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    border: 2px solid #d53f8c;
-}
-
-.timeline-item h4 {
-    color: #d53f8c;
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.timeline-location {
-    color: #666;
-    font-weight: 500;
-    margin-bottom: 0.5rem;
-}
-
-.timeline-date {
-    color: #888;
-    font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.timeline-date i {
-    color: #d53f8c;
-}
-
-@media (max-width: 768px) {
+    
     .timeline-header {
-        gap: 2rem;
+        flex-direction: column;
+        gap: 1rem;
     }
     
-    .timeline-type {
-        font-size: 1rem;
-    }
-    
-    .timeline {
-        padding-left: 1rem;
-    }
-    
-    .timeline-item {
-        padding-left: 1.5rem;
+    .timeline-btn {
+        width: 100%;
+        justify-content: center;
     }
 }
     </style>
@@ -562,30 +620,31 @@ a:hover {
 <body>
     <header>
         <h1>Lahlou Asmae</h1>
-        <p>Étudiante en 4ᵉ année de cycle d'ingénieur, filière Ingénierie Informatique et Technologies Émergentes.</p>
+        <p>Élève Ingénieure en Génie Informatique | Full Stack & Data Engineer</p>
+        <p>Spécialisée en Développement Full Stack, Cloud, DevOps & Data Science</p>
         <div class="social-icons">
-            <a href="https://www.linkedin.com/in/asmae-lahlou-48a1a9304" target="_blank" class="social-icon">
+            <a href="https://www.linkedin.com/in/asmae-lahlou-48a1a9304" target="_blank" class="social-icon" title="LinkedIn">
                 <i class="fab fa-linkedin"></i>
             </a>
-            <a href="https://github.com/lahlouasmae" target="_blank" class="social-icon">
+            <a href="https://github.com/lahlouasmae" target="_blank" class="social-icon" title="GitHub">
                 <i class="fab fa-github"></i>
             </a>
-            <a href="mailto:asmaelahlou123@gmail.com" class="social-icon">
+            <a href="mailto:asmaelahlou123@gmail.com" class="social-icon" title="Email">
                 <i class="far fa-envelope"></i>
             </a>
-            <a href="tel:+212-66639-1005" class="social-icon">
+            <a href="tel:+212-66639-1005" class="social-icon" title="Téléphone">
                 <i class="fas fa-phone"></i>
             </a>
         </div>
     </header>
-
 
     <nav>
         <ul>
             <li><a href="#about">À propos</a></li>
             <li><a href="#projects">Projets</a></li>
             <li><a href="#skills">Compétences</a></li>
-            <li><a href="#Qualification">Qualification</a></li>
+            <li><a href="#qualification">Qualification</a></li>
+            <li><a href="#certifications">Certifications</a></li>
             <li><a href="#contact">Contact</a></li>
         </ul>
     </nav>
@@ -593,9 +652,11 @@ a:hover {
     <section id="about">
         <h2 class="section-title">À propos de moi</h2>
         <div class="profile">
-            <img src="asmae.jpeg" alt="Photo de profil">
-            <div>
-                <p>Élève ingénieur passionné par les technologies web, mobiles, et l’innovation numérique, avec une expertise en développement full-stack (Flutter, React, PHP, Java, Firebase), intelligence artificielle, Big Data et Cloud Computing. Expérience pratique en analyse et traitement de données à grande échelle (Python, SQL, Hadoop), apprentissage automatique (TensorFlow, Scikit-learn) et architecture cloud (AWS). Compétences en DevOps avec CI/CD, Docker, Kubernetes, SonaQube et gestion d’infrastructures cloud. Toujours en quête de nouveaux défis, je conçois des solutions performantes, scalables et optimisées pour l’expérience utilisateur.</p>
+            <img src="asmae.jpeg" alt="Photo de profil Asmae Lahlou">
+            <div class="profile-text">
+                <p>Élève ingénieure passionnée par les technologies web, mobiles et l'innovation numérique, avec une expertise en <strong>développement full-stack</strong> (Flutter, React, Spring Boot, PHP, Java, Firebase), <strong>intelligence artificielle</strong>, <strong>Big Data</strong> et <strong>Cloud Computing</strong>.</p>
+                <p>Expérience pratique en analyse et traitement de données à grande échelle (Python, SQL, Spark, Hadoop), apprentissage automatique (TensorFlow, Scikit-learn, NLP) et architecture cloud (AWS, OCI). Compétences en <strong>DevOps</strong> avec CI/CD, Docker, Kubernetes et gestion d'infrastructures cloud.</p>
+                <p>Toujours en quête de nouveaux défis, je conçois des solutions performantes, scalables et optimisées pour l'expérience utilisateur.</p>
             </div>
         </div>
     </section>
@@ -604,95 +665,134 @@ a:hover {
         <h2 class="section-title">Mes Projets</h2>
         <div class="projects-grid">
             <div class="project-card">
-                <img src="mm.png" alt="Projet 1">
+                <img src="mm.png" alt="Mindful Moments">
                 <div class="project-info">
                     <h3>Mindful Moments</h3>
-                    <p>Application mobile de gestion du stress avec modèle IA.</p>
-                    <p>Technologies : ReactJS, Spring Boot, Java, API RESTful, API Spotify, Python, MySQL</p>
-                    <p><a href="https://github.com/lahlouasmae/MindfulMoments" target="_blank">Lien Github</a></p>
-                  </div>
-
+                    <p>Application mobile de détection et gestion du stress utilisant l'IA (modèle RoBERTa NLP) avec interface web back-office pour l'analyse temps réel.</p>
+                    <p><strong>Technologies :</strong> React.js, Spring Boot, Java, Python, RoBERTa NLP, MySQL, API RESTful, API Spotify</p>
+                    <p><a href="https://github.com/lahlouasmae/MindfulMoments" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
             </div>
+
             <div class="project-card">
-                <img src="sur.png" alt="Projet 2">
+                <img src="sur.png" alt="Ensaj Surveillance">
                 <div class="project-info">
                     <h3>Ensaj Surveillance</h3>
-                    <p>Développement d'une application web de gestion de la surveillance académique </p>
-                      <p>Technologies : ReactJS, Spring Boot, Spring Security, API RESTful, MySQL</p>
-                      <p><a href="https://github.com/lahlouasmae/surveillances" target="_blank">Lien Github</a></p>
-
-                    </div>
+                    <p>Plateforme web de gestion de surveillance académique avec système d'authentification sécurisé et gestion des performances RH (+30% gain de temps).</p>
+                    <p><strong>Technologies :</strong> React.js, Spring Boot, Spring Security, API RESTful, MySQL</p>
+                    <p><a href="https://github.com/lahlouasmae/surveillances" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
             </div>
+
             <div class="project-card">
-              <img src="co.png" alt="Projet 2">
-              <div class="project-info">
-                  <h3>CoYAZ</h3>
-                  <p>Application de covoiturage multiplateforme</p>
-                    <p>Technologies : Flutter, Firebase</p>
-                    <p><a href="https://github.com/zinebtaghti/covoiturage" target="_blank">Lien Github</a></p>
-
-                  </div>
-          </div>
-          <div class="project-card">
-            <img src="bi.png" alt="Projet 2">
-            <div class="project-info">
-                <h3>Morocco's Developers</h3>
-                <p>
-                  Analyse de données de 5000+ profils de développeurs marocains
-                  Tableaux de bord interactifs, présentations techniques
-                  </p>
-                  <p>\\Technologies : Suite Microsoft BI (SSMS, SSIS, SSAS, SSRS)</p>
-                  <p><a href="https://drive.google.com/file/d/1rzBm6QjRZBn6K1kTozESn1YwDSNFdIEe/view?usp=drive_link" target="_blank">Rapport SSRS</a></p>
-                  <p><a href="https://www.kaggle.com/datasets/amr009/state-of-dev-mrocco-2020" target="_blank">Dataset</a></p>
-            </div>
-            </div>
-            <div class="project-card">
-              <img src="re.png" alt="Projet 2">
-              <div class="project-info">
-                  <h3>Performance des APIs</h3>
-                  <p>
-                    Étude comparative de performances d'APIs (temps de réponse, charge, comsomation des ressources)
-                     </p>
-                    <p>Technologies : JMeter, Spring Boot, Grafana, H2</p>
-                    <p><a href="https://github.com/lahlouasmae/recherche/tree/main/MultiBackend" target="_blank">Lien Github</a></p>
-                    <p><a href="https://drive.google.com/file/d/1MH0kdrhSxQHyQGUyek09elqamFjw4daV/view?usp=sharing
-                      " target="_blank">Rapport</a></p>
-
-              </div>
-          </div>
-          <div class="project-card">
-            <img src="p.png" alt="Projet 2">
-            <div class="project-info">
-                <h3>Performance de Graphql avec Apollo</h3>
-                <p>Analyse des performances client mobile (latence, débit)
-                    
-                   </p>
-                  <p>Technologies : Java, Spring Boot, MySQL</p>
-                  <p><a href="https://github.com/lahlouasmae/recherche" target="_blank">Lien Github</a></p>
-                  <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view?usp=sharing
-                    " target="_blank">Rapport</a></p>
-
-            </div>
-        </div>
-      
-            <div class="project-card">
-                <img src="flo.png" alt="Projet 3">
+                <img src="co.png" alt="CoYAZ">
                 <div class="project-info">
-                    <h3>FlowerShop</h3>
-                    <p>Application e-commerce mobile pour une boutique de fleurs</p>
-                      <p>Technologies : Kotlin, PHP, MySQL</p>
-                      <p><a href="https://github.com/lahlouasmae/recherche" target="_blank">Lien Github</a></p>
-                    </div>
+                    <h3>CoYAZ - Covoiturage</h3>
+                    <p>Application multiplateforme de covoiturage avec matching et messagerie en temps réel via WebSocket.</p>
+                    <p><strong>Technologies :</strong> Flutter, Firebase Authentication, Firestore, WebSocket</p>
+                    <p><a href="https://github.com/zinebtaghti/covoiturage" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
             </div>
+
             <div class="project-card">
-                <img src="cod.png" alt="Projet 3">
+                <img src="bi.png" alt="Morocco's Developers">
                 <div class="project-info">
-                    <h3>Code212</h3>
-                    <p>
-                        Analyse et configuration réseau pour centre de certification
-                       </p>
-                      <p>Technologies : Packet Tracer, TCP/IP, LAN</p>
-                      <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view?usp=sharing" target="_blank">Rapport</a></p>
+                    <h3>Morocco's Developers - Business Intelligence</h3>
+                    <p>Analyse complète de 5000+ profils de développeurs marocains avec exploitation de la chaîne décisionnelle Microsoft (SSIS, SSAS, SSRS, SSMS) et visualisations Power BI.</p>
+                    <p><strong>Technologies :</strong> Suite Microsoft BI, Power BI, DAX, SQL Server</p>
+                    <p><a href="https://drive.google.com/file/d/1rzBm6QjRZBn6K1kTozESn1YwDSNFdIEe/view" target="_blank"><i class="fas fa-file-pdf"></i> Rapport SSRS</a></p>
+                    <p><a href="https://www.kaggle.com/datasets/amr009/state-of-dev-mrocco-2020" target="_blank"><i class="fas fa-database"></i> Dataset Kaggle</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="p.png" alt="Performance GraphQL">
+                <div class="project-info">
+                    <h3>Performance GraphQL avec Apollo</h3>
+                    <p>Analyse comparative des performances GraphQL vs REST sur mobile (latence, débit, temps de réponse).</p>
+                    <p><strong>Technologies :</strong> GraphQL, Apollo, Java, Spring Boot, Android, MySQL</p>
+                    <p><a href="https://github.com/lahlouasmae/recherche" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                    <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view" target="_blank"><i class="fas fa-file-pdf"></i> Rapport d'analyse</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="re.png" alt="Performance APIs">
+                <div class="project-info">
+                    <h3>Étude Comparative - Performance des APIs</h3>
+                    <p>Analyse approfondie des performances d'APIs (temps de réponse, charge serveur, consommation ressources) avec tests JMeter et monitoring Grafana.</p>
+                    <p><strong>Technologies :</strong> JMeter, Spring Boot, Grafana, H2, Prometheus</p>
+                    <p><a href="https://github.com/lahlouasmae/recherche/tree/main/MultiBackend" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                    <p><a href="https://drive.google.com/file/d/1MH0kdrhSxQHyQGUyek09elqamFjw4daV/view" target="_blank"><i class="fas fa-file-pdf"></i> Rapport complet</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="flo.png" alt="FlowerShop">
+                <div class="project-info">
+                    <h3>FlowerShop E-commerce</h3>
+                    <p>Application e-commerce mobile pour boutique de fleurs avec gestion des commandes et paiements.</p>
+                    <p><strong>Technologies :</strong> Kotlin, PHP, MySQL, API RESTful</p>
+                    <p><a href="https://github.com/lahlouasmae/recherche" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="cod.png" alt="Code212">
+                <div class="project-info">
+                    <h3>Code212 - Infrastructure Réseau</h3>
+                    <p>Conception et configuration réseau complète pour centre de certification avec architecture TCP/IP et LAN.</p>
+                    <p><strong>Technologies :</strong> Cisco Packet Tracer, TCP/IP, LAN/WAN, Configuration routeurs/switches</p>
+                    <p><a href="https://drive.google.com/file/d/1bers-HwPriLzvKg7xx6lai5aA2DB8llL/view" target="_blank"><i class="fas fa-file-pdf"></i> Documentation technique</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="zahi.png" alt="Plateforme Streaming Vidéo">
+                <div class="project-info">
+                    <h3>Plateforme de Streaming Vidéo</h3>
+                    <p>Architecture microservices scalable avec déploiement modulaire haute disponibilité.</p>
+                    <p><strong>Technologies :</strong> Spring Boot, Angular, Spring Security, Flask, MongoDB, MySQL, RabbitMQ, MinIO, Botpress, Mailtrap, PayPal</p>
+                                        <p><a href="https://github.com/lahlouasmae/ZAHYFILMS" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="bt_logo.jpg" alt="BuildTrack">
+                <div class="project-info">
+                    <h3>BuildTrack - Suivi de Chantiers</h3>
+                    <p>Application mobile de gestion temps réel des projets de construction (photos, avancement, commentaires).</p>
+                    <p><strong>Technologies :</strong> React Native, Firebase Authentication, Cloud Firestore, Cloudinary</p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="pipeline.png" alt="Pipeline Big Data">
+                <div class="project-info">
+                    <h3>Pipeline Big Data - Temps Réel</h3>
+                    <p>Architecture de données temps réel avec Kafka, Spark, PostgreSQL et Superset. Pipeline containerisé Docker pour ingestion d'APIs et analyse comportements d'achat.</p>
+                    <p><strong>Technologies :</strong> Apache Kafka, Apache Spark, PostgreSQL, Superset, Docker</p>
+                                                            <p><a href="https://github.com/lahlouasmae/FirstPipelineBigData" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="nlp.png" alt="NLP Amazon Reviews">
+                <div class="project-info">
+                    <h3>NLP - Analyse Avis Amazon</h3>
+                    <p>Analyse de sentiments sur dataset de 180,000 avis produits avec nettoyage de données, détection d'anomalies et visualisation des tendances.</p>
+                    <p><strong>Technologies :</strong> Python (Pandas, NLTK, Scikit-learn), Power BI, Google Colab</p>
+                                                                                <p><a href="https://github.com/lahlouasmae/amazonReviews" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <img src="gtd.png" alt="Gtd Data Mining">
+                <div class="project-info">
+                    <h3>Data Mining - Global Terrorism Database</h3>
+                    <p>Analyse de 180,000+ lignes de données sur le terrorisme mondial avec PCA, test du Chi-deux et visualisation des tendances par pays/type d'attaque.</p>
+                    <p><strong>Technologies :</strong> Python (Pandas, Matplotlib, NumPy), Power BI</p>
+                                                                                                    <p><a href="https://github.com/lahlouasmae/Global-Terrorism-Database" target="_blank"><i class="fab fa-github"></i> Voir sur GitHub</a></p>
                 </div>
             </div>
         </div>
@@ -701,206 +801,464 @@ a:hover {
     <section id="skills">
         <h2 class="section-title">Mes Compétences</h2>
         <div class="skills-grid">
-            <!-- Développement Front-end -->
+            <!-- Langages & Programmation -->
             <div class="skill-category">
-                <h3>Front-end</h3>
+                <h3><i class="fas fa-code"></i> Langages</h3>
                 <div class="skills-container">
-                    <span class="skill-item">HTML</span>
-                    <span class="skill-item">CSS</span>
+                    <span class="skill-item">Java</span>
                     <span class="skill-item">JavaScript</span>
-                    <span class="skill-item">React</span>
-                    <span class="skill-item">Bootstrap</span>
-                    <span class="skill-item">Taiwilnd</span>
-                </div>
-            </div>
-    
-            <!-- Développement Back-end -->
-            <div class="skill-category">
-                <h3>Back-end</h3>
-                <div class="skills-container">
+                    <span class="skill-item">Python</span>
+                    <span class="skill-item">PHP</span>
+                    <span class="skill-item">C</span>
                     <span class="skill-item">C#</span>
-                    <span class="skill-item">Spring boot</span>
-                    <span class="skill-item">Spring cloud</span>
-                    <span class="skill-item">Spring security</span>
-                   
-
-
+                    <span class="skill-item">Dart</span>
+                    <span class="skill-item">Kotlin</span>
+                    <span class="skill-item">SQL</span>
+                    <span class="skill-item">PL/SQL</span>
                 </div>
             </div>
-    
+
+            <!-- Frontend -->
+            <div class="skill-category">
+                <h3><i class="fas fa-palette"></i> Frontend</h3>
+                <div class="skills-container">
+                    <span class="skill-item">React.js</span>
+                    <span class="skill-item">Angular</span>
+                    <span class="skill-item">HTML5</span>
+                    <span class="skill-item">CSS3</span>
+                    <span class="skill-item">JavaScript</span>
+                    <span class="skill-item">Bootstrap</span>
+                    <span class="skill-item">Tailwind CSS</span>
+                    <span class="skill-item">Oracle JET</span>
+                </div>
+            </div>
+
+            <!-- Backend -->
+            <div class="skill-category">
+                <h3><i class="fas fa-server"></i> Backend</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Spring Boot</span>
+                    <span class="skill-item">Spring Cloud</span>
+                    <span class="skill-item">Spring Security</span>
+                    <span class="skill-item">Laravel</span>
+                    <span class="skill-item">Flask</span>
+                    <span class="skill-item">Micronaut</span>
+                    <span class="skill-item">API RESTful</span>
+                    <span class="skill-item">GraphQL</span>
+                    <span class="skill-item">JWT/OAuth2</span>
+                </div>
+            </div>
+
             <!-- Mobile -->
             <div class="skill-category">
-                <h3>Mobile</h3>
+                <h3><i class="fas fa-mobile-alt"></i> Mobile</h3>
                 <div class="skills-container">
-                    <span class="skill-item">Kotlin</span>
                     <span class="skill-item">Flutter</span>
-                    <span class="skill-item">Java</span>
                     <span class="skill-item">React Native</span>
+                    <span class="skill-item">Android (Java)</span>
+                    <span class="skill-item">Kotlin</span>
                 </div>
             </div>
-    
-            <!-- Base de données -->
+
+            <!-- Bases de données -->
             <div class="skill-category">
-                <h3>Base de données</h3>
+                <h3><i class="fas fa-database"></i> Bases de Données</h3>
                 <div class="skills-container">
                     <span class="skill-item">MySQL</span>
+                    <span class="skill-item">Oracle DB</span>
+                    <span class="skill-item">SQL Server</span>
+                    <span class="skill-item">PostgreSQL</span>
+                    <span class="skill-item">MongoDB</span>
                     <span class="skill-item">Firebase</span>
-                    <span class="skill-item">Oracle</span>
-                    <span class="skill-item">Sql Server</span>
+                    <span class="skill-item">Cassandra</span>
+                    <span class="skill-item">Redis</span>
+                    <span class="skill-item">Neo4j</span>
+                    <span class="skill-item">HBase</span>
+                </div>
+            </div>
 
-                </div>
-            </div>
-    
-            <!-- DevOps & Outils -->
+            <!-- Data Science & ML -->
             <div class="skill-category">
-                <h3>DevOps & Outils</h3>
+                <h3><i class="fas fa-brain"></i> Data Science & ML</h3>
                 <div class="skills-container">
-                    <span class="skill-item">Docker</span>
-                    <span class="skill-item">SonarQube</span>
-                    <span class="skill-item">Git</span>
-                    <span class="skill-item">Kubernetes</span>
+                    <span class="skill-item">Pandas</span>
+                    <span class="skill-item">NumPy</span>
+                    <span class="skill-item">Scikit-learn</span>
+                    <span class="skill-item">TensorFlow</span>
+                    <span class="skill-item">Keras</span>
+                    <span class="skill-item">NLTK</span>
+                    <span class="skill-item">SpaCy</span>
+                    <span class="skill-item">OpenCV</span>
                 </div>
             </div>
-    
+
+            <!-- Big Data -->
+            <div class="skill-category">
+                <h3><i class="fas fa-project-diagram"></i> Big Data</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Hadoop</span>
+                    <span class="skill-item">Apache Spark</span>
+                    <span class="skill-item">Apache Kafka</span>
+                    <span class="skill-item">Hive</span>
+                    <span class="skill-item">ZooKeeper</span>
+                    <span class="skill-item">Talend</span>
+                    <span class="skill-item">Airflow</span>
+                </div>
+            </div>
+
+            <!-- Business Intelligence -->
+            <div class="skill-category">
+                <h3><i class="fas fa-chart-line"></i> Business Intelligence</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Power BI</span>
+                    <span class="skill-item">Tableau</span>
+                    <span class="skill-item">SSAS</span>
+                    <span class="skill-item">SSIS</span>
+                    <span class="skill-item">SSRS</span>
+                    <span class="skill-item">Jasper Reports</span>
+                    <span class="skill-item">Excel Avancé</span>
+                </div>
+            </div>
+
+            <!-- Cloud & DevOps -->
+            <div class="skill-category">
+                <h3><i class="fas fa-cloud"></i> Cloud & DevOps</h3>
+                <div class="skills-container">
+                    <span class="skill-item">AWS</span>
+                    <span class="skill-item">Oracle Cloud (OCI)</span>
+                    <span class="skill-item">Docker</span>
+                    <span class="skill-item">Kubernetes</span>
+                    <span class="skill-item">Jenkins</span>
+                    <span class="skill-item">GitLab CI/CD</span>
+                    <span class="skill-item">GitHub Actions</span>
+                    <span class="skill-item">SonarQube</span>
+                    <span class="skill-item">Prometheus</span>
+                    <span class="skill-item">Rancher</span>
+                </div>
+            </div>
+
             <!-- Tests -->
             <div class="skill-category">
-                <h3>Tests</h3>
+                <h3><i class="fas fa-vial"></i> Tests & Qualité</h3>
                 <div class="skills-container">
-                    <span class="skill-item">Junit</span>
-                    <span class="skill-item">Expresso</span>
+                    <span class="skill-item">JUnit</span>
                     <span class="skill-item">Mockito</span>
+                    <span class="skill-item">Espresso</span>
+                    <span class="skill-item">JMeter</span>
+                    <span class="skill-item">Postman</span>
+                    <span class="skill-item">Swagger</span>
                 </div>
             </div>
-            <div class="skill-category">
-                <h3>Data Analyste</h3>
-                <div class="skills-container">
-                    <span class="skill-item">Power Bi</span>
-                    <span class="skill-item">Talend</span>
-                    <span class="skill-item">Tibco Jasper</span>
-                    <span class="skill-item">SSAS, SSIS, SSRS</span>
 
+            <!-- Architecture & Méthodologies -->
+            <div class="skill-category">
+                <h3><i class="fas fa-sitemap"></i> Architecture</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Microservices</span>
+                    <span class="skill-item">MVC</span>
+                    <span class="skill-item">MVVM</span>
+                    <span class="skill-item">Serverless</span>
+                    <span class="skill-item">Design Patterns</span>
+                    <span class="skill-item">Agile/Scrum</span>
+                    <span class="skill-item">UML</span>
+                    <span class="skill-item">Merise 2</span>
+                </div>
+            </div>
+
+            <!-- Outils de développement -->
+            <div class="skill-category">
+                <h3><i class="fas fa-tools"></i> Outils</h3>
+                <div class="skills-container">
+                    <span class="skill-item">Git/GitHub</span>
+                    <span class="skill-item">GitLab</span>
+                    <span class="skill-item">VS Code</span>
+                    <span class="skill-item">IntelliJ IDEA</span>
+                    <span class="skill-item">Android Studio</span>
+                    <span class="skill-item">Jupyter</span>
+                    <span class="skill-item">Google Colab</span>
                 </div>
             </div>
         </div>
     </section>
-    <section id="Qualification">
+
+    <section id="qualification">
         <h2 class="section-title">Qualification</h2>
-        <h3 class="section-subtitle">Mon parcours personnel</h3>
+        <h3 class="section-subtitle" style="text-align: center; color: #666; margin-bottom: 3rem;">Mon parcours personnel</h3>
     
         <div class="timeline-container">
             <div class="timeline-header">
                 <button class="timeline-btn active" data-target="education">
                     <i class="fas fa-graduation-cap"></i>
-                    <span>Education</span>
+                    <span>Formation</span>
                 </button>
                 <button class="timeline-btn" data-target="experience">
                     <i class="fas fa-briefcase"></i>
-                    <span>Experience</span>
+                    <span>Expérience</span>
                 </button>
             </div>
     
-            <div class="timeline" id="education">
+            <div class="timeline active" id="education">
                 <div class="timeline-item">
-                    <h4>Cycle d'ingénieur</h4>
-                    <p class="timeline-location">ENSAJ</p>
+                    <h4>Cycle d'Ingénieur - Informatique et Technologies Émergentes</h4>
+                    <p class="timeline-location">École Nationale des Sciences Appliquées (ENSAJ) - El Jadida</p>
                     <p class="timeline-date">
                         <i class="far fa-calendar-alt"></i>
-                        2023 - 2025
+                        2023 - 2025 (En cours)
                     </p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Deux années préparatoires</h4>
-                    <p class="timeline-location">ENSAJ</p>
+                    <h4>Classes Préparatoires Intégrées</h4>
+                    <p class="timeline-location">ENSAJ - El Jadida | Classée 11ᵉ de la promotion</p>
                     <p class="timeline-date">
                         <i class="far fa-calendar-alt"></i>
                         2021 - 2023
                     </p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Bacalaureat</h4>
-                    <p class="timeline-location">Lycée Qualifiant Jaafer El Fassi El Fihri</p>
+                    <h4>Baccalauréat Sciences Physiques - Option Français</h4>
+                    <p class="timeline-location">Lycée Qualifiant Jaâfer El Fassi El Fihri - Casablanca</p>
+                    <p style="color: var(--primary); font-weight: 600; margin-top: 0.5rem;">Mention Très Bien - Majorante de la classe</p>
                     <p class="timeline-date">
                         <i class="far fa-calendar-alt"></i>
-                        2018-2021
+                        2018 - 2021
                     </p>
                 </div>
             </div>
     
-            <div class="timeline" id="experience" style="display: none;">
+            <div class="timeline" id="experience">
                 <div class="timeline-item">
-                    <h4>Stagiaire en Développement web</h4>
-                    <p class="timeline-location">CihBank</p>
+                    <h4>Stage d'Application - Ingénieur Logiciel</h4>
+                    <p class="timeline-location">Oracle R&D Center - Équipe GraalVM RISQ | Casablanca</p>
+                    <p style="margin-top: 0.8rem; line-height: 1.8;">
+                        • Contributrice sur <strong>ol-automation</strong> : outil d'automatisation interne Oracle<br>
+                        • Développement de nouvelles fonctionnalités CLI/Serveur<br>
+                        • Résolution d'anomalies critiques<br>
+                        • <strong>+40% d'efficacité</strong> des workflows grâce aux nouvelles fonctionnalités<br>
+                        • Automatisation de 8 workflows (gestion projets, communication, monitoring)<br>
+                        • Technologies : Java, REST API, Atlassian SDK, GitHub/GitLab API
+                    </p>
                     <p class="timeline-date">
                         <i class="far fa-calendar-alt"></i>
-                        juil. 2024 - aout. 2024
+                        Juin 2025 - Septembre 2025
                     </p>
                 </div>
                 <div class="timeline-item">
-                    <h4>Stagiaire en Système d'information</h4>
-                    <p class="timeline-location">Exxelia</p>
+                    <h4>Stage d'Initiation - Développement Web & Reporting</h4>
+                    <p class="timeline-location">CIH Bank Siège - Équipe Reporting | Casablanca</p>
+                    <p style="margin-top: 0.8rem; line-height: 1.8;">
+                        • Développement d'une application web de gestion RH (performances/absences)<br>
+                        • Stack full-stack : HTML/CSS/JS, PHP, MySQL<br>
+                        • Création de dashboards Power BI avec DAX<br>
+                        • <strong>Impact : 30% de gain de temps</strong> sur les processus RH
+                    </p>
                     <p class="timeline-date">
                         <i class="far fa-calendar-alt"></i>
-                        juil. 2023 - aout. 2023
+                        Juillet 2024 - Août 2024
                     </p>
                 </div>
             </div>
         </div>
     </section>
+
+    <section id="certifications">
+        <h2 class="section-title">Certifications</h2>
+        <div class="certifications-grid">
+            <!-- AWS -->
+            <div class="cert-card">
+                <h4><i class="fab fa-aws"></i> AWS Academy Cloud Architecting</h4>
+                <p>Architecture cloud et conception de solutions scalables sur AWS</p>
+                <span class="cert-date">Novembre 2024 - Janvier 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-aws"></i> AWS Academy Cloud Developing</h4>
+                <p>Développement d'applications cloud-native sur AWS</p>
+                <span class="cert-date">Octobre 2024 - Décembre 2024</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-aws"></i> AWS Academy Cloud Foundations</h4>
+                <p>Fondamentaux du cloud computing et services AWS</p>
+                <span class="cert-date">2024</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-aws"></i> Getting Started with DevOps on AWS</h4>
+                <p>Mise en œuvre de pratiques DevOps sur AWS</p>
+                <span class="cert-date">Février 2025</span>
+            </div>
+
+            <!-- Oracle -->
+            <div class="cert-card">
+                <h4><i class="fas fa-certificate"></i> Oracle Cloud Infrastructure 2024 Foundations</h4>
+                <p>Certification officielle Oracle OCI - Associate Level</p>
+                <span class="cert-date">Février 2025</span>
+            </div>
+
+            <!-- Google -->
+            <div class="cert-card">
+                <h4><i class="fab fa-google"></i> Introduction to Generative AI</h4>
+                <p>Fondamentaux de l'IA générative et applications</p>
+                <span class="cert-date">Janvier 2025</span>
+            </div>
+
+            <!-- IBM & Coursera -->
+            <div class="cert-card">
+                <h4><i class="fas fa-graduation-cap"></i> Introduction to DevOps (IBM)</h4>
+                <p>Principes et pratiques DevOps</p>
+                <span class="cert-date">Septembre 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fas fa-database"></i> Big Data with Spark and Hadoop</h4>
+                <p>Traitement de données massives avec Spark et Hadoop</p>
+                <span class="cert-date">Juillet 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fas fa-server"></i> Big Data 101 (Cognitive Class)</h4>
+                <p>Introduction au Big Data et technologies associées</p>
+                <span class="cert-date">Janvier 2025</span>
+            </div>
+
+            <!-- HackerRank -->
+            <div class="cert-card">
+                <h4><i class="fas fa-code"></i> SQL Advanced Certificate</h4>
+                <p>Maîtrise avancée de SQL - HackerRank</p>
+                <span class="cert-date">Février 2025</span>
+            </div>
+
+            <!-- LinkedIn Learning -->
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> Java 8 Essential Training</h4>
+                <p>Maîtrise des fonctionnalités Java 8</p>
+                <span class="cert-date">Juillet 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> Learning Python</h4>
+                <p>Fondamentaux de la programmation Python</p>
+                <span class="cert-date">Août 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> Les Fondements du Data Engineering</h4>
+                <p>Principes de l'ingénierie des données</p>
+                <span class="cert-date">Juillet 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> SQL Essential Training</h4>
+                <p>Fondamentaux et pratiques SQL</p>
+                <span class="cert-date">Juillet 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> DevOps Foundations</h4>
+                <p>Principes fondamentaux DevOps</p>
+                <span class="cert-date">Juin 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> Git Essential Training</h4>
+                <p>Gestion de version avec Git</p>
+                <span class="cert-date">Juin 2025</span>
+            </div>
+
+            <div class="cert-card">
+                <h4><i class="fab fa-linkedin"></i> Learning Linux Command Line</h4>
+                <p>Maîtrise de la ligne de commande Linux</p>
+                <span class="cert-date">Juin 2025</span>
+            </div>
+
+            <!-- Scrum -->
+            <div class="cert-card">
+                <h4><i class="fas fa-users"></i> Introduction to Scrum Master Training</h4>
+                <p>Méthodologie Agile et rôle de Scrum Master</p>
+                <span class="cert-date">Juillet 2025</span>
+            </div>
+        </div>
+    </section>
+
     <section id="contact">
         <h2 class="section-title">Me Contacter</h2>
         <form class="contact-form" id="contactForm">
             <div class="form-group">
-                <label for="name">Nom</label>
-                <input type="text" id="name" required>
+                <label for="name"><i class="fas fa-user"></i> Nom</label>
+                <input type="text" id="name" required placeholder="Votre nom complet">
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="email" required placeholder="votre.email@exemple.com">
             </div>
             <div class="form-group">
-                <label for="message">Message</label>
-                <textarea id="message" rows="5" required></textarea>
+                <label for="message"><i class="fas fa-comment"></i> Message</label>
+                <textarea id="message" rows="5" required placeholder="Votre message..."></textarea>
             </div>
-            <button type="submit">Envoyer</button>
+            <button type="submit"><i class="fas fa-paper-plane"></i> Envoyer le message</button>
         </form>
     </section>
 
     <footer>
         <p>&copy; 2025 Lahlou Asmae. Tous droits réservés.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Élève Ingénieure en Génie Informatique | Casablanca, Maroc</p>
     </footer>
 
     <script>
-        // Smooth scrolling pour les liens de navigation
+        // Smooth scrolling
         document.querySelectorAll('nav a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
                 const targetId = this.getAttribute('href');
-                document.querySelector(targetId).scrollIntoView({
-                    behavior: 'smooth'
+                const target = document.querySelector(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Timeline toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.timeline-btn');
+            const timelines = document.querySelectorAll('.timeline');
+
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    
+                    timelines.forEach(timeline => {
+                        timeline.classList.remove('active');
+                    });
+                    
+                    const targetId = button.getAttribute('data-target');
+                    const targetTimeline = document.getElementById(targetId);
+                    if (targetTimeline) {
+                        targetTimeline.classList.add('active');
+                    }
                 });
             });
         });
 
-        // Gestion du formulaire de contact
+        // Contact form
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Récupération des valeurs
             const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const message = document.getElementById('message').value;
 
-            // Simulation d'envoi (à remplacer par votre logique d'envoi réelle)
+            // Simulation d'envoi
             console.log('Formulaire soumis :', { name, email, message });
-            alert('Merci pour votre message ! Je vous répondrai bientôt.');
+            alert('✅ Merci pour votre message ! Je vous répondrai dans les plus brefs délais.');
             
-            // Reset du formulaire
             this.reset();
         });
 
-        // Animation des cartes projet au scroll
+        // Animation on scroll
         const observerOptions = {
-            threshold: 0.2
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -912,39 +1270,33 @@ a:hover {
             });
         }, observerOptions);
 
-        document.querySelectorAll('.project-card').forEach(card => {
+        document.querySelectorAll('.project-card, .skill-category, .cert-card').forEach(card => {
             card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.5s ease-out';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease-out';
             observer.observe(card);
         });
-        // Ajoutez ce code dans votre balise script existante
-document.addEventListener('DOMContentLoaded', function() {
-    const buttons = document.querySelectorAll('.timeline-btn');
-    const timelines = document.querySelectorAll('.timeline');
 
-    // Afficher Education par défaut
-    document.querySelector('#education').style.display = 'block';
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            // Retirer la classe active de tous les boutons
-            buttons.forEach(btn => btn.classList.remove('active'));
+        // Active nav link on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section');
             
-            // Ajouter la classe active au bouton cliqué
-            button.classList.add('active');
-            
-            // Cacher toutes les timelines
-            timelines.forEach(timeline => {
-                timeline.style.display = 'none';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
             });
-            
-            // Afficher la timeline correspondante
-            const targetId = button.getAttribute('data-target');
-            document.getElementById(targetId).style.display = 'block';
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.style.background = '';
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.style.background = 'rgba(213, 63, 140, 0.1)';
+                }
+            });
         });
-    });
-});
     </script>
 </body>
 </html>
